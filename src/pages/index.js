@@ -16,17 +16,23 @@ const IndexPage = () => {
                         <span className='top-hello'>👋 Hello</span>
                         <p className='top-intro'>I am Shantanu Kaushik</p>
                     </div>
-                    <Availablebtn isAvailable={true} />
+                    <Availablebtn isAvailable={false} />
                     <div>
                         <ul className='top-nav'>
-                            <li className='top-nav-item'>About</li>
-                            <li className='top-nav-item'>Projects</li>
-                            <li className='top-nav-item'>contact</li>
+                            <li className='top-nav-item' href='#about'>
+                                <a href='#about'>About</a>
+                            </li>
+                            <li className='top-nav-item' href='#projects'>
+                                <a href='#projects'>Projects</a>
+                            </li>
+                            <li className='top-nav-item' href='#contact'>
+                                <a href='#contact'>Contact</a>
+                            </li>
                         </ul>
                     </div>
                 </nav>
-                
-                <Availablebtn isAvailable={true} cls={'ava-btn--2'}/>
+
+                <Availablebtn isAvailable={false} cls={"ava-btn--2"} />
 
                 <header className='hero'>
                     <div className='hero-cta'>
@@ -56,15 +62,15 @@ const IndexPage = () => {
 
                         <p className='font-base mb-2rem'>Want to Hire me?</p>
 
-                        <div className='hero-cta-btn'>
+                        <a className='hero-cta-btn' href='#contact'>
                             Yes Build Me A Website{" "}
                             <BiSolidChevronRight className='hero-cta-btn-icon' />
-                        </div>
+                        </a>
                     </div>
                     <img src={heroImage} alt='hero' className='hero-profile' />
                 </header>
 
-                <section className='about-me'>
+                <section className='about-me' id='about'>
                     <h2 className='about-me-heading'>About Me</h2>
 
                     <p className='about-me-p'>
@@ -84,7 +90,7 @@ const IndexPage = () => {
                     </p>
                 </section>
 
-                <section className='projects'>
+                <section className='projects' id='projects'>
                     <h1 className='projects-heading'>My projects</h1>
 
                     <div className='project'>
@@ -220,7 +226,7 @@ const IndexPage = () => {
                     </div>
                 </section>
 
-                <section className='contact'>
+                <section className='contact' id='contact'>
                     <h2 className='contact-heading'>
                         Send me a message
                         <span className='contact-subheading'>
