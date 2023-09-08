@@ -1,176 +1,348 @@
-import * as React from "react"
-
-const pageStyles = {
-  color: "#232129",
-  padding: 96,
-  fontFamily: "-apple-system, Roboto, sans-serif, serif",
-}
-const headingStyles = {
-  marginTop: 0,
-  marginBottom: 64,
-  maxWidth: 320,
-}
-const headingAccentStyles = {
-  color: "#663399",
-}
-const paragraphStyles = {
-  marginBottom: 48,
-}
-const codeStyles = {
-  color: "#8A6534",
-  padding: 4,
-  backgroundColor: "#FFF4DB",
-  fontSize: "1.25rem",
-  borderRadius: 4,
-}
-const listStyles = {
-  marginBottom: 96,
-  paddingLeft: 0,
-}
-const listItemStyles = {
-  fontWeight: 300,
-  fontSize: 24,
-  maxWidth: 560,
-  marginBottom: 30,
-}
-
-const linkStyle = {
-  color: "#8954A8",
-  fontWeight: "bold",
-  fontSize: 16,
-  verticalAlign: "5%",
-}
-
-const docLinkStyle = {
-  ...linkStyle,
-  listStyleType: "none",
-  marginBottom: 24,
-}
-
-const descriptionStyle = {
-  color: "#232129",
-  fontSize: 14,
-  marginTop: 10,
-  marginBottom: 0,
-  lineHeight: 1.25,
-}
-
-const docLink = {
-  text: "Documentation",
-  url: "https://www.gatsbyjs.com/docs/",
-  color: "#8954A8",
-}
-
-const badgeStyle = {
-  color: "#fff",
-  backgroundColor: "#088413",
-  border: "1px solid #088413",
-  fontSize: 11,
-  fontWeight: "bold",
-  letterSpacing: 1,
-  borderRadius: 4,
-  padding: "4px 6px",
-  display: "inline-block",
-  position: "relative",
-  top: -2,
-  marginLeft: 10,
-  lineHeight: 1,
-}
-
-const links = [
-  {
-    text: "Tutorial",
-    url: "https://www.gatsbyjs.com/docs/tutorial/getting-started/",
-    description:
-      "A great place to get started if you're new to web development. Designed to guide you through setting up your first Gatsby site.",
-    color: "#E95800",
-  },
-  {
-    text: "How to Guides",
-    url: "https://www.gatsbyjs.com/docs/how-to/",
-    description:
-      "Practical step-by-step guides to help you achieve a specific goal. Most useful when you're trying to get something done.",
-    color: "#1099A8",
-  },
-  {
-    text: "Reference Guides",
-    url: "https://www.gatsbyjs.com/docs/reference/",
-    description:
-      "Nitty-gritty technical descriptions of how Gatsby works. Most useful when you need detailed information about Gatsby's APIs.",
-    color: "#BC027F",
-  },
-  {
-    text: "Conceptual Guides",
-    url: "https://www.gatsbyjs.com/docs/conceptual/",
-    description:
-      "Big-picture explanations of higher-level Gatsby concepts. Most useful for building understanding of a particular topic.",
-    color: "#0D96F2",
-  },
-  {
-    text: "Plugin Library",
-    url: "https://www.gatsbyjs.com/plugins",
-    description:
-      "Add functionality and customize your Gatsby site or app with thousands of plugins built by our amazing developer community.",
-    color: "#8EB814",
-  },
-  {
-    text: "Build and Host",
-    url: "https://www.gatsbyjs.com/cloud",
-    badge: true,
-    description:
-      "Now you’re ready to show the world! Give your Gatsby site superpowers: Build and host on Gatsby Cloud. Get started for free!",
-    color: "#663399",
-  },
-]
+import * as React from "react";
+import Availablebtn from "../components/AvailableBtn";
+import heroImage from "../images/hero-section-image-sm.png";
+import { BiSolidChevronRight } from "react-icons/bi";
+import { FiLink2 } from "react-icons/fi";
+import { BsGithub, BsTwitter, BsLinkedin } from "react-icons/bs";
+import { AiFillHeart, AiFillInstagram } from "react-icons/ai";
+import { FaDev } from "react-icons/fa";
 
 const IndexPage = () => {
-  return (
-    <main style={pageStyles}>
-      <h1 style={headingStyles}>
-        Congratulations
-        <br />
-        <span style={headingAccentStyles}>— you just made a Gatsby site! 🎉🎉🎉</span>
-      </h1>
-      <p style={paragraphStyles}>
-        Edit <code style={codeStyles}>src/pages/index.js</code> to see this page
-        update in real-time. 😎
-      </p>
-      <ul style={listStyles}>
-        <li style={docLinkStyle}>
-          <a
-            style={linkStyle}
-            href={`${docLink.url}?utm_source=starter&utm_medium=start-page&utm_campaign=minimal-starter`}
-          >
-            {docLink.text}
-          </a>
-        </li>
-        {links.map(link => (
-          <li key={link.url} style={{ ...listItemStyles, color: link.color }}>
-            <span>
-              <a
-                style={linkStyle}
-                href={`${link.url}?utm_source=starter&utm_medium=start-page&utm_campaign=minimal-starter`}
-              >
-                {link.text}
-              </a>
-              {link.badge && (
-                <span style={badgeStyle} aria-label="New Badge">
-                  NEW!
-                </span>
-              )}
-              <p style={descriptionStyle}>{link.description}</p>
-            </span>
-          </li>
-        ))}
-      </ul>
-      <img
-        alt="Gatsby G Logo"
-        src="data:image/svg+xml,%3Csvg width='24' height='24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 2a10 10 0 110 20 10 10 0 010-20zm0 2c-3.73 0-6.86 2.55-7.75 6L14 19.75c3.45-.89 6-4.02 6-7.75h-5.25v1.5h3.45a6.37 6.37 0 01-3.89 4.44L6.06 9.69C7 7.31 9.3 5.63 12 5.63c2.13 0 4 1.04 5.18 2.65l1.23-1.06A7.959 7.959 0 0012 4zm-8 8a8 8 0 008 8c.04 0 .09 0-8-8z' fill='%23639'/%3E%3C/svg%3E"
-      />
-    </main>
-  )
-}
+    return (
+        <>
+            <div className='container'>
+                <nav className='top'>
+                    <div className='top-greet'>
+                        <span className='top-hello'>👋 Hello</span>
+                        <p className='top-intro'>I am Shantanu Kaushik</p>
+                    </div>
+                    <Availablebtn isAvailable={true} />
+                    <div>
+                        <ul className='top-nav'>
+                            <li className='top-nav-item'>About</li>
+                            <li className='top-nav-item'>Projects</li>
+                            <li className='top-nav-item'>contact</li>
+                        </ul>
+                    </div>
+                </nav>
+                
+                <Availablebtn isAvailable={true} cls={'ava-btn--2'}/>
 
-export default IndexPage
+                <header className='hero'>
+                    <div className='hero-cta'>
+                        <h1 className='hero-cta-primary'>
+                            Need a{" "}
+                            <span className='hero-cta-primary-subtext'>
+                                website{" "}
+                            </span>{" "}
+                            that is both{" "}
+                            <span className='hero-cta-primary-subtext'>
+                                beautiful
+                            </span>{" "}
+                            and{" "}
+                            <span className='hero-cta-primary-subtext'>
+                                functional
+                            </span>{" "}
+                            ?{" "}
+                            <span className='color-green'>
+                                I can make it for you.
+                            </span>
+                        </h1>
 
-export const Head = () => <title>Home Page</title>
+                        <p className='hero-cta-secondary'>
+                            I am a full-stack web developer and I design and
+                            build websites that stand out.
+                        </p>
+
+                        <p className='font-base mb-2rem'>Want to Hire me?</p>
+
+                        <div className='hero-cta-btn'>
+                            Yes Build Me A Website{" "}
+                            <BiSolidChevronRight className='hero-cta-btn-icon' />
+                        </div>
+                    </div>
+                    <img src={heroImage} alt='hero' className='hero-profile' />
+                </header>
+
+                <section className='about-me'>
+                    <h2 className='about-me-heading'>About Me</h2>
+
+                    <p className='about-me-p'>
+                        Hello there! I'm Shantanu Kaushik, a passionate and
+                        creative full-stack web developer with a deep love for
+                        crafting exceptional online experiences. With a keen eye
+                        for design and a strong command over various web
+                        technologies, I take great pride in my ability to bring
+                        ideas to life and build stunning, functional websites.
+                    </p>
+                    <p className='about-me-p'>
+                        My journey into the world of web development started
+                        with a fascination for the boundless possibilities that
+                        the internet offers. Over the years, I've honed my
+                        skills and expertise in an array of technologies that
+                        empower me to create dynamic and user-friendly websites.
+                    </p>
+                </section>
+
+                <section className='projects'>
+                    <h1 className='projects-heading'>My projects</h1>
+
+                    <div className='project'>
+                        <div className='project-details'>
+                            <h2 className='project-title'>Coavoid-web-app</h2>
+                            <ul className='project-tech_stack-list'>
+                                <li className='project-tech_stack-list-item'>
+                                    Node.js
+                                </li>
+                                <li className='project-tech_stack-list-item'>
+                                    Express
+                                </li>
+                                <li className='project-tech_stack-list-item'>
+                                    Bootstrap
+                                </li>
+                                <li className='project-tech_stack-list-item'>
+                                    Geocoding API
+                                </li>
+                                <li className='project-tech_stack-list-item'>
+                                    Mapbox
+                                </li>
+                            </ul>
+                            <div className='project-link'>
+                                <a href='#' className='project-link__weblink'>
+                                    <FiLink2 className='project-link__svg' />
+                                </a>
+                                <a href='#' className='project-link__github'>
+                                    <BsGithub className='project-link__svg' />
+                                </a>
+                            </div>
+                            <p className='project-description'>
+                                Coavoid-web-app is a tool which enables the user
+                                to get informed about the amount crowd at a
+                                place beforehand. I created this during the 2nd
+                                wave of Covid-19 to solve the problem that I
+                                myself faced.
+                            </p>
+                        </div>
+                        <img
+                            src={heroImage}
+                            alt='coavoid'
+                            className='project-image'
+                        />
+                    </div>
+
+                    <div className='project row-reverse'>
+                        <div className='project-details'>
+                            <h2 className='project-title'>Coavoid-web-app</h2>
+                            <ul className='project-tech_stack-list'>
+                                <li className='project-tech_stack-list-item'>
+                                    Node.js
+                                </li>
+                                <li className='project-tech_stack-list-item'>
+                                    Express
+                                </li>
+                                <li className='project-tech_stack-list-item'>
+                                    Bootstrap
+                                </li>
+                                <li className='project-tech_stack-list-item'>
+                                    Geocoding API
+                                </li>
+                                <li className='project-tech_stack-list-item'>
+                                    Mapbox
+                                </li>
+                            </ul>
+                            <div className='project-link'>
+                                <a href='#' className='project-link__weblink'>
+                                    <FiLink2 className='project-link__svg' />
+                                </a>
+                                <a href='#' className='project-link__github'>
+                                    <BsGithub className='project-link__svg' />
+                                </a>
+                            </div>
+                            <p className='project-description'>
+                                Coavoid-web-app is a tool which enables the user
+                                to get informed about the amount crowd at a
+                                place beforehand. I created this during the 2nd
+                                wave of Covid-19 to solve the problem that I
+                                myself faced.
+                            </p>
+                        </div>
+                        <img
+                            src={heroImage}
+                            alt='coavoid'
+                            className='project-image'
+                        />
+                    </div>
+                </section>
+
+                <section className='projects'>
+                    <h1 className='projects-heading'>My Work Experience</h1>
+                    <div className='project'>
+                        <div className='project-details'>
+                            <h2 className='project-title'>Coavoid-web-app</h2>
+                            <ul className='project-tech_stack-list'>
+                                <li className='project-tech_stack-list-item'>
+                                    Node.js
+                                </li>
+                                <li className='project-tech_stack-list-item'>
+                                    Express
+                                </li>
+                                <li className='project-tech_stack-list-item'>
+                                    Bootstrap
+                                </li>
+                                <li className='project-tech_stack-list-item'>
+                                    Geocoding API
+                                </li>
+                                <li className='project-tech_stack-list-item'>
+                                    Mapbox
+                                </li>
+                            </ul>
+                            <div className='project-link'>
+                                <a href='#' className='project-link__weblink'>
+                                    <FiLink2 className='project-link__svg' />
+                                </a>
+                                <a href='#' className='project-link__github'>
+                                    <BsGithub className='project-link__svg' />
+                                </a>
+                            </div>
+                            <p className='project-description'>
+                                Coavoid-web-app is a tool which enables the user
+                                to get informed about the amount crowd at a
+                                place beforehand. I created this during the 2nd
+                                wave of Covid-19 to solve the problem that I
+                                myself faced.
+                            </p>
+                        </div>
+                        <img
+                            src={heroImage}
+                            alt='coavoid'
+                            className='project-image'
+                        />
+                    </div>
+                </section>
+
+                <section className='contact'>
+                    <h2 className='contact-heading'>
+                        Send me a message
+                        <span className='contact-subheading'>
+                            I would love to hear from you
+                        </span>
+                    </h2>
+
+                    <form action='#' className='contact-form'>
+                        <div className='contact-form-group'>
+                            <label htmlFor='name' className='form-label'>
+                                YOUR NAME
+                            </label>
+                            <input
+                                type='text'
+                                id='name'
+                                className='form-input'
+                            />
+                        </div>
+                        <div className='contact-form-group'>
+                            <label htmlFor='email' className='form-label'>
+                                EMAIL ADDRESS
+                            </label>
+                            <input
+                                type='email'
+                                id='email'
+                                className='form-input'
+                            />
+                        </div>
+                        <div className='contact-form-group'>
+                            <label htmlFor='message' className='form-label'>
+                                YOUR MESSAGE
+                            </label>
+                            <textarea
+                                id='message'
+                                className='form-input'
+                                rows={10}
+                            />
+                        </div>
+                        <button className='submit'>Send</button>
+                    </form>
+                </section>
+            </div>
+            <footer className='footer'>
+                <div className='footer-left'>
+                    <h1 className='footer-left-name'>Shantanu Kaushik</h1>
+
+                    <p className='footer-left-subtext'>
+                        Made With <AiFillHeart className='footer-left-heart' />
+                    </p>
+
+                    <div className='footer-left-icon-tray'>
+                        <a
+                            href='https://github.com/Aloneduckling/'
+                            className='footer-left-link'
+                            target='_blank'
+                        >
+                            <BsGithub className='footer-left-icon' />
+                        </a>
+
+                        <a
+                            href='https://www.linkedin.com/in/shantanu-kaushik-731258176/'
+                            className='footer-left-link'
+                            target='_blank'
+                        >
+                            <BsLinkedin className='footer-left-icon' />
+                        </a>
+
+                        <a
+                            href='https://dev.to/aloneduckling'
+                            className='footer-left-link'
+                            target='_blank'
+                        >
+                            <FaDev className='footer-left-icon' />
+                        </a>
+
+                        <a
+                            href='https://twitter.com/Shantan05703379'
+                            className='footer-left-link'
+                            target='_blank'
+                        >
+                            <BsTwitter className='footer-left-icon' />
+                        </a>
+
+                        <a
+                            href='https://www.instagram.com/shantanukaushik12/'
+                            className='footer-left-link'
+                            target='_blank'
+                        >
+                            <AiFillInstagram className='footer-left-icon' />
+                        </a>
+                    </div>
+                </div>
+
+                <div className='footer-right'>
+                    <a
+                        href='https://drive.google.com/file/d/180d8NhcX9-fuyUF1qsSADoluLpu0aBPd/view?usp=sharing'
+                        className='footer-right-btn'
+                        target='_blank'
+                    >
+                        My Resume
+                    </a>
+                </div>
+            </footer>
+        </>
+    );
+};
+
+export default IndexPage;
+
+export const Head = () => {
+    return (
+        <>
+            <link rel='preconnect' href='https://fonts.googleapis.com' />
+            <link
+                rel='preconnect'
+                href='https://fonts.gstatic.com'
+                crossorigin
+            />
+            <link
+                href='https://fonts.googleapis.com/css2?family=Inter:wght@300;400;800&family=Poppins:wght@300;400;700;800&display=swap'
+                rel='stylesheet'
+            />
+        </>
+    );
+};
