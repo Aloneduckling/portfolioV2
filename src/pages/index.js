@@ -1,13 +1,69 @@
-import * as React from "react";
+import React, { useState } from "react";
+import Project from "../components/Project";
+import { graphql } from "gatsby";
 import Availablebtn from "../components/AvailableBtn";
 import heroImage from "../images/hero-section-image-sm.png";
 import { BiSolidChevronRight } from "react-icons/bi";
-import { FiLink2 } from "react-icons/fi";
 import { BsGithub, BsTwitter, BsLinkedin } from "react-icons/bs";
 import { AiFillHeart, AiFillInstagram } from "react-icons/ai";
 import { FaDev } from "react-icons/fa";
 
-const IndexPage = () => {
+
+
+//index page
+const IndexPage = ({ data }) => {
+    const [showMessage, setshowMessage] = useState(false);
+    const [formError, setFormError] = useState(false);
+
+    const handleFormSubmit = async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(e.target);
+        e.target.reset();
+        try {
+            await fetch(
+                "https://getform.io/f/7e55e3c6-d05b-4e37-8310-dd7e19aefde4",
+                {
+                    method: "POST",
+                    body: formData,
+                    headers: {
+                        Accept: "application/json",
+                    },
+                }
+            ).then((res) =>  {
+                if (res.status !== 200) {
+                    throw new Error('err');
+                }
+            });
+        } catch (error) {
+            setFormError(true);
+        }
+        
+        setshowMessage(true);
+        setTimeout(() => {
+            setshowMessage(false);
+            setFormError(false);
+        }, 3000);
+    };
+
+    const availability = data.sanityAvailability.isAvailable;
+
+    const pr = data.allSanityProjects.edges.filter((item) => {
+        return item.node.category === "pr";
+    });
+
+    const we = data.allSanityProjects.edges.filter((item) => {
+        return item.node.category === "we";
+    });
+
+    const one = pr.map((item, id) => {
+        return <Project key={item.node.id} project={item.node} />;
+    });
+
+    const two = we.map((item, id) => {
+        return <Project key={item.node.id} project={item.node} />;
+    });
+
     return (
         <>
             <div className='container'>
@@ -16,7 +72,7 @@ const IndexPage = () => {
                         <span className='top-hello'>👋 Hello</span>
                         <p className='top-intro'>I am Shantanu Kaushik</p>
                     </div>
-                    <Availablebtn isAvailable={false} />
+                    <Availablebtn isAvailable={availability} />
                     <div>
                         <ul className='top-nav'>
                             <li className='top-nav-item' href='#about'>
@@ -32,7 +88,7 @@ const IndexPage = () => {
                     </div>
                 </nav>
 
-                <Availablebtn isAvailable={false} cls={"ava-btn--2"} />
+                <Availablebtn isAvailable={availability} cls={"ava-btn--2"} />
 
                 <header className='hero'>
                     <div className='hero-cta'>
@@ -92,138 +148,12 @@ const IndexPage = () => {
 
                 <section className='projects' id='projects'>
                     <h1 className='projects-heading'>My projects</h1>
-
-                    <div className='project'>
-                        <div className='project-details'>
-                            <h2 className='project-title'>Coavoid-web-app</h2>
-                            <ul className='project-tech_stack-list'>
-                                <li className='project-tech_stack-list-item'>
-                                    Node.js
-                                </li>
-                                <li className='project-tech_stack-list-item'>
-                                    Express
-                                </li>
-                                <li className='project-tech_stack-list-item'>
-                                    Bootstrap
-                                </li>
-                                <li className='project-tech_stack-list-item'>
-                                    Geocoding API
-                                </li>
-                                <li className='project-tech_stack-list-item'>
-                                    Mapbox
-                                </li>
-                            </ul>
-                            <div className='project-link'>
-                                <a href='#' className='project-link__weblink'>
-                                    <FiLink2 className='project-link__svg' />
-                                </a>
-                                <a href='#' className='project-link__github'>
-                                    <BsGithub className='project-link__svg' />
-                                </a>
-                            </div>
-                            <p className='project-description'>
-                                Coavoid-web-app is a tool which enables the user
-                                to get informed about the amount crowd at a
-                                place beforehand. I created this during the 2nd
-                                wave of Covid-19 to solve the problem that I
-                                myself faced.
-                            </p>
-                        </div>
-                        <img
-                            src={heroImage}
-                            alt='coavoid'
-                            className='project-image'
-                        />
-                    </div>
-
-                    <div className='project row-reverse'>
-                        <div className='project-details'>
-                            <h2 className='project-title'>Coavoid-web-app</h2>
-                            <ul className='project-tech_stack-list'>
-                                <li className='project-tech_stack-list-item'>
-                                    Node.js
-                                </li>
-                                <li className='project-tech_stack-list-item'>
-                                    Express
-                                </li>
-                                <li className='project-tech_stack-list-item'>
-                                    Bootstrap
-                                </li>
-                                <li className='project-tech_stack-list-item'>
-                                    Geocoding API
-                                </li>
-                                <li className='project-tech_stack-list-item'>
-                                    Mapbox
-                                </li>
-                            </ul>
-                            <div className='project-link'>
-                                <a href='#' className='project-link__weblink'>
-                                    <FiLink2 className='project-link__svg' />
-                                </a>
-                                <a href='#' className='project-link__github'>
-                                    <BsGithub className='project-link__svg' />
-                                </a>
-                            </div>
-                            <p className='project-description'>
-                                Coavoid-web-app is a tool which enables the user
-                                to get informed about the amount crowd at a
-                                place beforehand. I created this during the 2nd
-                                wave of Covid-19 to solve the problem that I
-                                myself faced.
-                            </p>
-                        </div>
-                        <img
-                            src={heroImage}
-                            alt='coavoid'
-                            className='project-image'
-                        />
-                    </div>
+                    {one}
                 </section>
 
                 <section className='projects'>
                     <h1 className='projects-heading'>My Work Experience</h1>
-                    <div className='project'>
-                        <div className='project-details'>
-                            <h2 className='project-title'>Coavoid-web-app</h2>
-                            <ul className='project-tech_stack-list'>
-                                <li className='project-tech_stack-list-item'>
-                                    Node.js
-                                </li>
-                                <li className='project-tech_stack-list-item'>
-                                    Express
-                                </li>
-                                <li className='project-tech_stack-list-item'>
-                                    Bootstrap
-                                </li>
-                                <li className='project-tech_stack-list-item'>
-                                    Geocoding API
-                                </li>
-                                <li className='project-tech_stack-list-item'>
-                                    Mapbox
-                                </li>
-                            </ul>
-                            <div className='project-link'>
-                                <a href='#' className='project-link__weblink'>
-                                    <FiLink2 className='project-link__svg' />
-                                </a>
-                                <a href='#' className='project-link__github'>
-                                    <BsGithub className='project-link__svg' />
-                                </a>
-                            </div>
-                            <p className='project-description'>
-                                Coavoid-web-app is a tool which enables the user
-                                to get informed about the amount crowd at a
-                                place beforehand. I created this during the 2nd
-                                wave of Covid-19 to solve the problem that I
-                                myself faced.
-                            </p>
-                        </div>
-                        <img
-                            src={heroImage}
-                            alt='coavoid'
-                            className='project-image'
-                        />
-                    </div>
+                    {two}
                 </section>
 
                 <section className='contact' id='contact'>
@@ -234,7 +164,7 @@ const IndexPage = () => {
                         </span>
                     </h2>
 
-                    <form action='#' className='contact-form'>
+                    <form className='contact-form' onSubmit={handleFormSubmit}>
                         <div className='contact-form-group'>
                             <label htmlFor='name' className='form-label'>
                                 YOUR NAME
@@ -242,7 +172,9 @@ const IndexPage = () => {
                             <input
                                 type='text'
                                 id='name'
+                                name='name'
                                 className='form-input'
+                                required
                             />
                         </div>
                         <div className='contact-form-group'>
@@ -252,7 +184,9 @@ const IndexPage = () => {
                             <input
                                 type='email'
                                 id='email'
+                                name='email'
                                 className='form-input'
+                                required
                             />
                         </div>
                         <div className='contact-form-group'>
@@ -262,13 +196,31 @@ const IndexPage = () => {
                             <textarea
                                 id='message'
                                 className='form-input'
+                                name='message'
                                 rows={10}
+                                required
                             />
                         </div>
-                        <button className='submit'>Send</button>
+                        <input
+                            type='hidden'
+                            name='_gotcha'
+                            style={{ display: "none !important" }}
+                        ></input>
+                        <div className='contact-form-group'>
+                            <button className='submit'>Send</button>
+                            {showMessage && (
+                                <p className='message'>
+                                    {formError
+                                        ? `An error occurred, please try again later`
+                                        : `Thanks for getting in touch! we will get
+                                    back to you soon.`}
+                                </p>
+                            )}
+                        </div>
                     </form>
                 </section>
             </div>
+
             <footer className='footer'>
                 <div className='footer-left'>
                     <h1 className='footer-left-name'>Shantanu Kaushik</h1>
@@ -282,6 +234,7 @@ const IndexPage = () => {
                             href='https://github.com/Aloneduckling/'
                             className='footer-left-link'
                             target='_blank'
+                            rel='noreferrer'
                         >
                             <BsGithub className='footer-left-icon' />
                         </a>
@@ -290,6 +243,7 @@ const IndexPage = () => {
                             href='https://www.linkedin.com/in/shantanu-kaushik-731258176/'
                             className='footer-left-link'
                             target='_blank'
+                            rel='noreferrer'
                         >
                             <BsLinkedin className='footer-left-icon' />
                         </a>
@@ -298,6 +252,7 @@ const IndexPage = () => {
                             href='https://dev.to/aloneduckling'
                             className='footer-left-link'
                             target='_blank'
+                            rel='noreferrer'
                         >
                             <FaDev className='footer-left-icon' />
                         </a>
@@ -306,6 +261,7 @@ const IndexPage = () => {
                             href='https://twitter.com/Shantan05703379'
                             className='footer-left-link'
                             target='_blank'
+                            rel='noreferrer'
                         >
                             <BsTwitter className='footer-left-icon' />
                         </a>
@@ -314,6 +270,7 @@ const IndexPage = () => {
                             href='https://www.instagram.com/shantanukaushik12/'
                             className='footer-left-link'
                             target='_blank'
+                            rel='noreferrer'
                         >
                             <AiFillInstagram className='footer-left-icon' />
                         </a>
@@ -325,6 +282,7 @@ const IndexPage = () => {
                         href='https://drive.google.com/file/d/180d8NhcX9-fuyUF1qsSADoluLpu0aBPd/view?usp=sharing'
                         className='footer-right-btn'
                         target='_blank'
+                        rel='noreferrer'
                     >
                         My Resume
                     </a>
@@ -336,6 +294,37 @@ const IndexPage = () => {
 
 export default IndexPage;
 
+
+
+
+//graphQL query
+export const data = graphql`
+    query q1 {
+        allSanityProjects {
+            edges {
+                node {
+                    id
+                    name
+                    description
+                    tech_stack
+                    category
+                    github
+                    web_link
+                    image {
+                        asset {
+                            url
+                        }
+                    }
+                }
+            }
+        }
+        sanityAvailability {
+            isAvailable
+        }
+    }
+`;
+
+//<head> confing
 export const Head = () => {
     return (
         <>
