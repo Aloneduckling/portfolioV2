@@ -338,6 +338,11 @@ export const Head = () => {
                 href='https://fonts.googleapis.com/css2?family=Inter:wght@300;400;800&family=Poppins:wght@300;400;700;800&display=swap'
                 rel='stylesheet'
             />
+            <link
+                rel='shortcut icon'
+                type='image/jpg'
+                href='../images/s-favicon.png'
+            />
         </>
     );
 };
