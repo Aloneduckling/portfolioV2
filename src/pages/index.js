@@ -279,7 +279,7 @@ const IndexPage = ({ data }) => {
 
                 <div className='footer-right'>
                     <a
-                        href='https://drive.google.com/file/d/1oS2E_vmlMPNNcJUp9fDPpG306dhGgmu8/view?usp=sharing'
+                        href='https://drive.google.com/file/d/1L09DSidXgztOxBvfafelq3vh--4LR5ZO/view?usp=sharing'
                         className='footer-right-btn'
                         target='_blank'
                         rel='noreferrer'
